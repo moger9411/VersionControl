@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,28 @@ namespace UserMaintenance
                 FullName = textBox1.Text,
             };
             users.Add(u);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.ShowDialog();
+
+            if (sfd.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            using (StreamWriter sr = new StreamWriter(sfd.FileName, false, Encoding.UTF8))
+            {
+                foreach (var u in users)
+                {
+                    sr.Write(u.ID);
+                    sr.Write(" ");
+                    sr.Write(u.FullName);
+                    sr.WriteLine();
+
+                }
+            }
         }
     }
 }
