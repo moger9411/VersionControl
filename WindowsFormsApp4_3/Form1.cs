@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Reflection;
 
 namespace WindowsFormsApp4_3
 {
@@ -14,6 +16,7 @@ namespace WindowsFormsApp4_3
     {
         List<Flat> Flats;
         RealEstateEntities context = new RealEstateEntities();
+        
         public Form1()
         {
             InitializeComponent();
