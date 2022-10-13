@@ -19,6 +19,23 @@ namespace mintazh
         {
             InitializeComponent();
             Fuggveny("Summer_olympic_Medals.csv");
+            FillCombo();
+            Scores();
+        }
+
+        private void Scores()
+        {
+            foreach (var x in results)
+            {
+                x.Position = WhatRes(x);
+            }
+        }
+
+        private void FillCombo()
+        {
+            comboBox1.DataSource = (from x in results
+                                    orderby x.Year
+                                    select x.Year).Distinct().ToList();
         }
 
         private void Fuggveny(string fileName)
@@ -37,8 +54,33 @@ namespace mintazh
                     medalok[2] = Convert.ToInt32(line[7]);
                     result.Medals = medalok;
                     result.Country = line[3];
+                    results.Add(result);
                 }
             }
+
+        }
+        private int WhatRes(OlympicResult result)
+        {
+            int counter = 0;
+            var eredmeny = from x in results
+                           where x.Year == result.Year && x.Country != result.Country
+                           select x;
+            foreach (var x in eredmeny)
+            {
+                if (x.Medals[0] > result.Medals[0])
+                {
+                    counter++;
+                }
+                if (x.Medals[0] == result.Medals[0] && x.Medals[1] > result.Medals[1])
+                {
+                    counter++;
+                }
+                if (x.Medals[0] == result.Medals[0] && x.Medals[1] == result.Medals[1] && x.Medals[2] > result.Medals[2])
+                {
+                    counter++;
+                }
+            }
+            return counter + 1;
         }
     }
 }
