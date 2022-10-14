@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d639615b2f19446ebfc122d168345309" Name="Diagram1">
+        <EntityTypeShape EntityType="DVD_RentalModel.Category" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DVD_RentalModel.DVD" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DVD_RentalModel.Language" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DVD_RentalModel.Member" Width="1.5" PointX="6" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DVD_RentalModel.Rental" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="DVD_RentalModel.FK_DVD_ToCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="DVD_RentalModel.FK_Member_ToCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="DVD_RentalModel.FK_DVD_ToLanguage" ManuallyRouted="false" />
+        <AssociationConnector Association="DVD_RentalModel.FK_Rental_ToDVD" ManuallyRouted="false" />
+        <AssociationConnector Association="DVD_RentalModel.FK_Member_ToLanguage" ManuallyRouted="false" />
+        <AssociationConnector Association="DVD_RentalModel.FK_Rental_ToMember" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
