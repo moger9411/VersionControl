@@ -23,6 +23,32 @@ namespace G3W0I5_5gyak
             InitializeComponent();
             WebCall();
             RefreshData();
+            Xml();
+        }
+
+        private void Xml()
+        {
+            var xml = new XmlDocument();
+            xml.LoadXml(WebCall());
+
+            foreach (XmlElement element in xml.DocumentElement)
+            {
+                var rate = new RateData();
+                Rates.Add(rate);
+
+                rate.Date = DateTime.Parse(element.GetAttribute("date"));
+
+                var childElement = (XmlElement)element.ChildNodes[0];
+                if (childElement == null)
+                    continue;
+                rate.Currency = childElement.GetAttribute("curr");
+
+                var unit = decimal.Parse(childElement.GetAttribute("unit"));
+                var value = decimal.Parse(childElement.InnerText);
+                if (unit != 0)
+                    rate.Value = value / unit;
+
+            }
         }
 
         private void RefreshData()
