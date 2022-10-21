@@ -21,9 +21,9 @@ namespace G3W0I5_5gyak
         public Form1()
         {
             InitializeComponent();
-            WebCall();
+           
             RefreshData();
-            Xml();
+            
         }
 
         private void Xml()
@@ -55,6 +55,28 @@ namespace G3W0I5_5gyak
         {
             Rates.Clear();
             dataGridView1.DataSource = Rates;
+            WebCall();
+            Xml();
+            BuildChart();
+        }
+
+        private void BuildChart()
+        {
+            chartRateData.DataSource = Rates;
+
+            var series = chartRateData.Series[0];
+            series.ChartType = SeriesChartType.Line;
+            series.XValueMember = "Date";
+            series.YValueMembers = "Value";
+            series.BorderWidth = 2;
+
+            var legend = chartRateData.Legends[0];
+            legend.Enabled = false;
+
+            var chartArea = chartRateData.ChartAreas[0];
+            chartArea.AxisX.MajorGrid.Enabled = false;
+            chartArea.AxisY.MajorGrid.Enabled = false;
+            chartArea.AxisY.IsStartedFromZero = false;
         }
 
         private string WebCall()
