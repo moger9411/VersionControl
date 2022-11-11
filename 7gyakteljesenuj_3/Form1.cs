@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace _7gyakteljesenuj_3
         List<Tick> Ticks;
 
         List<PortfolioItem> Portfolio = new List<PortfolioItem>();
+        List<decimal> nyeresegek;
         public Form1()
         {
             InitializeComponent();
@@ -41,6 +43,7 @@ namespace _7gyakteljesenuj_3
                                       select x)
                                         .ToList();
             MessageBox.Show(nyereségekRendezve[nyereségekRendezve.Count() / 5].ToString());
+            nyeresegek = nyereségekRendezve;
         }
 
         private void CreatePortfolio()
@@ -64,6 +67,39 @@ namespace _7gyakteljesenuj_3
                 value += (decimal)last.Price * item.Volume;
             }
             return value;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SaveFile(nyeresegek);
+
+        }
+        private static void SaveFile(List<decimal> nyereseg)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.DefaultExt = "csv";
+            sfd.AddExtension = true;
+            sfd.InitialDirectory = Application.StartupPath;
+            if (sfd.ShowDialog() != DialogResult.OK) return;
+            using (StreamWriter sw = new StreamWriter(sfd.FileName, false, Encoding.UTF8))
+            {
+                sw.Write("Időszak");
+                sw.Write(';');
+                sw.Write("Nyereség");
+                sw.WriteLine();
+                int idoszak = 0;
+                foreach (var x in nyereseg)
+                {
+                    sw.Write(idoszak);
+                    sw.Write(";");
+                    sw.Write(x);
+                    sw.WriteLine();
+                    idoszak++;
+
+                }
+            }
+
+
         }
     }
 }
